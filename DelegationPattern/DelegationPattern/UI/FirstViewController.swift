@@ -10,7 +10,6 @@ import UIKit
 class FirstViewController: UIViewController {
 
     // MARK: - Outlets
-
     private lazy var topContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +21,6 @@ class FirstViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
-        //view.setContentCompressionResistancePriority(.defaultHigh + 1, for: .vertical)
         view.backgroundColor = .red
         return view
     }()
@@ -31,13 +29,13 @@ class FirstViewController: UIViewController {
         let verticalStack = UIStackView()
         verticalStack.translatesAutoresizingMaskIntoConstraints = false
         verticalStack.axis = .vertical
-        verticalStack.distribution  = UIStackView.Distribution.fill
+        verticalStack.distribution  = .fill
         return verticalStack
     }()
 
     private lazy var textLabel: UILabel = {
         var label = UILabel()
-        label.text = "HOLA"
+        label.text = Constants.Screen1.initialTitle
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = .white
@@ -48,13 +46,14 @@ class FirstViewController: UIViewController {
 
     private lazy var routerButton: UIButton = {
         let button = UIButton()
-        button.setTitle("HOLABUTTON", for: .normal)
+        button.setTitle(Constants.Screen1.routerButtonTitle, for: .normal)
 
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     // MARK: - Properties
+    let bottomContainerViewHeight: CGFloat = 80
     let containerYPadding: CGFloat = 30
     let stackXPadding: CGFloat = 50
     let stackYPadding: CGFloat = 300
@@ -71,7 +70,9 @@ class FirstViewController: UIViewController {
 extension FirstViewController {
 
     private func setupViews() {
-        // containerView within parent view
+        /**
+         
+         */
         view.addSubview(stackView)
         stackView.addArrangedSubview(topContainerView)
         topContainerView.addSubview(textLabel)
@@ -80,10 +81,14 @@ extension FirstViewController {
     }
 
     private func setupConstraints() {
-        // we use safeArea layouts for positioning the containerView
+        /**
+         we use safeArea layouts for positioning the stackView
+         */
         let safeArea = view.safeAreaLayoutGuide
 
-        // setting stack constraints
+        /**
+         setting stack constraints
+         */
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeArea.topAnchor,
                                            constant: stackYPadding),
@@ -95,10 +100,17 @@ extension FirstViewController {
                                               constant: -stackYPadding)
         ])
 
+        /**
+         setting bottomCointainerView constraints,
+         we want it to have a fixed height
+         */
         NSLayoutConstraint.activate([
-            bottomContainerView.heightAnchor.constraint(equalToConstant: 80)
+            bottomContainerView.heightAnchor.constraint(equalToConstant: bottomContainerViewHeight)
         ])
 
+        /**
+         second subView be centered in its container
+         */
         NSLayoutConstraint.activate([
             textLabel.centerXAnchor.constraint(equalTo: topContainerView.centerXAnchor),
             textLabel.centerYAnchor.constraint(equalTo: topContainerView.centerYAnchor,
