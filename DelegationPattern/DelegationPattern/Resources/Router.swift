@@ -19,9 +19,10 @@ struct MainRouter {
         case .first:
             context.navigationController?.popViewController(animated: true)
         default:
-            let controller = SecondBuilder.build() as? SecondViewController
-            controller?.messageDelegate = delegate
-            context.navigationController?.pushViewController(SecondBuilder.build(), animated: true)
+            let viewController = SecondBuilder.build() as? SecondViewController
+            guard let controller = viewController else { return }
+            controller.messageDelegate = delegate
+            context.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }
