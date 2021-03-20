@@ -45,20 +45,16 @@ class SecondViewController: UIViewController {
         setupUI()
         setupConstraints()
     }
-
-//    init(delegate: SendingMessageDelegate) {
-//        self.messageDelegate = delegate
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
 }
 
     // MARK: - Actions
 extension SecondViewController {
 
+    /**
+     Using a delegate, we send the string we want written on the first viewController.
+     This delegate conforms to the protocol defined on the previous file.
+     We then route back to the first viewController with an updated label.
+     */
     @objc private func sendMessage() {
         guard let text = textField.text else { return }
         messageDelegate?.sendMessage(text)

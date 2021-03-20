@@ -12,7 +12,6 @@ enum Screens {
     case second
 }
 
-
 struct MainRouter {
     func route(whereTo: Screens, context: UIViewController, delegate: SendingMessageDelegate?) {
         switch whereTo {

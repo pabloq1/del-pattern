@@ -92,6 +92,10 @@ extension FirstViewController {
         router?.route(whereTo: .second, context: self, delegate: self)
     }
 
+    /**
+     We implement the method defined on the protocol.
+     This method is called when the string is ready to be displayed on screen.
+     */
     func sendMessage(_ string: String) {
         self.textLabel.text = string
     }
