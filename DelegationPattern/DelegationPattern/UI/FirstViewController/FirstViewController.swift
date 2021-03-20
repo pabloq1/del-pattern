@@ -59,6 +59,7 @@ class FirstViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor.lightTeal
         button.dropShadow()
+        button.addTarget(self, action: #selector(buttonRoute), for: .touchUpInside)
         return button
     }()
 
@@ -68,29 +69,27 @@ class FirstViewController: UIViewController {
     let containerYPadding: CGFloat = 100
     let mainContainerXPadding: CGFloat = 20
     let mainContainerYPadding: CGFloat = 200
+    var router: MainRouter?
 
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.router = MainRouter()
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
     }
 }
 
-/**
- Actions
- */
+    // MARK: - Actions
 extension FirstViewController {
 
     @objc private func buttonRoute() {
-        
+        router?.route(whereTo: .second, context: self)
     }
 }
 
-/**
- UI
- */
+    // MARK: - UI
 extension FirstViewController {
 
     private func setupViews() {

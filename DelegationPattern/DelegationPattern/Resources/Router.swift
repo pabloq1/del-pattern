@@ -12,20 +12,18 @@ protocol Routering {
 }
 
 enum Screens {
-    case First
-    case Second
+    case first
+    case second
 }
 
 
 struct MainRouter: Routering {
     func route(whereTo: Screens, context: UIViewController) {
         switch whereTo {
-        case .First:
+        case .first:
             context.navigationController?.popViewController(animated: true)
         default:
-            context.navigationController?.present(SecondBuilder.build(),
-                                                  animated: true,
-                                                  completion: nil)
+            context.navigationController?.pushViewController(SecondBuilder.build(), animated: true)
         }
     }
 }
