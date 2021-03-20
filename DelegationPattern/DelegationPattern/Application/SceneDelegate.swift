@@ -19,9 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowsScene)
 
         // View hierarchy
-        let viewController = FirstViewController()
-
-        window.rootViewController = viewController
+        window.rootViewController = UINavigationController(rootViewController: FirstViewController())
         self.window = window
         window.makeKeyAndVisible()
 
