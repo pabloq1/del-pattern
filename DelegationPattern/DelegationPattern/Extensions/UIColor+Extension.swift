@@ -9,4 +9,5 @@ import UIKit
 
 extension UIColor {
     static let lightTeal = UIColor(named: "lightTeal")
+    static let darkTeal = UIColor(named: "darkTeal")
 }

@@ -7,13 +7,17 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+protocol SendingMessageDelegate {
+    func sendMessage(_ string: String)
+}
+
+class FirstViewController: UIViewController, SendingMessageDelegate {
 
     // MARK: - Outlets
     private lazy var mainContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor.darkTeal
         return view
     }()
 
@@ -65,7 +69,7 @@ class FirstViewController: UIViewController {
 
     // MARK: - Properties
     let bottomContainerViewHeight: CGFloat = 80
-    let stackPadding: CGFloat = 20
+    let stackPadding: CGFloat = 5
     let containerYPadding: CGFloat = 100
     let mainContainerXPadding: CGFloat = 20
     let mainContainerYPadding: CGFloat = 200
@@ -85,7 +89,11 @@ class FirstViewController: UIViewController {
 extension FirstViewController {
 
     @objc private func buttonRoute() {
-        router?.route(whereTo: .second, context: self)
+        router?.route(whereTo: .second, context: self, delegate: self)
+    }
+
+    func sendMessage(_ string: String) {
+        self.textLabel.text = string
     }
 }
 

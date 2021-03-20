@@ -7,22 +7,20 @@
 
 import UIKit
 
-protocol Routering {
-    func route(whereTo: Screens, context: UIViewController)
-}
-
 enum Screens {
     case first
     case second
 }
 
 
-struct MainRouter: Routering {
-    func route(whereTo: Screens, context: UIViewController) {
+struct MainRouter {
+    func route(whereTo: Screens, context: UIViewController, delegate: SendingMessageDelegate?) {
         switch whereTo {
         case .first:
             context.navigationController?.popViewController(animated: true)
         default:
+            let controller = SecondBuilder.build() as? SecondViewController
+            controller?.delegate = delegate
             context.navigationController?.pushViewController(SecondBuilder.build(), animated: true)
         }
     }
