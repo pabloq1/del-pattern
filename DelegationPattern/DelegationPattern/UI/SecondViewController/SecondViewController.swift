@@ -12,7 +12,10 @@ class SecondViewController: UIViewController {
     // MARK: - Outlets
     private lazy var textField: UITextField = {
         let textField = UITextField()
+        textField.delegate = textFieldDelegate
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textAlignment = .center
+        textField.borderStyle = .roundedRect
         textField.placeholder = Constants.Screen2.textFieldPlaceholder
         return textField
     }()
@@ -20,17 +23,22 @@ class SecondViewController: UIViewController {
     private lazy var routerButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor.lightTeal
         button.setTitle(Constants.Screen2.routerButtonTitle, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.dropShadow()
         return button
     }()
 
     // MARK: - Properties
-    var delegate: SendingMessageDelegate?
+    var messageDelegate: SendingMessageDelegate?
+    var textFieldDelegate: TextFieldDelegate?
 
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        textFieldDelegate = TextFieldDelegate(controller: self)
         setupUI()
         setupConstraints()
     }
@@ -52,8 +60,20 @@ extension SecondViewController {
     private func setupConstraints() {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 150),
-            textField.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor, constant: 100)
+            textField.topAnchor.constraint(equalTo: safeArea.topAnchor,
+                                           constant: 150),
+            textField.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor,
+                                               constant: 20),
+            textField.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor,
+                                                constant: -20),
+            textField.heightAnchor.constraint(equalToConstant: 60)
+        ])
+
+        NSLayoutConstraint.activate([
+            routerButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -100),
+            routerButton.widthAnchor.constraint(equalToConstant: 200),
+            routerButton.heightAnchor.constraint(equalToConstant: 60),
+            routerButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor)
         ])
     }
 }
